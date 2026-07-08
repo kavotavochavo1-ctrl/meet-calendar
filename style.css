@@ -1,0 +1,93 @@
+:root {
+  --bg: #f4f5f7;
+  --card: #fff;
+  --ink: #1c2331;
+  --muted: #6b7280;
+  --line: #e5e7eb;
+  --accent: #4f46e5;
+  --accent-ink: #fff;
+  --danger: #dc2626;
+  --shadow: 0 1px 3px rgba(0, 0, 0, .08), 0 4px 12px rgba(0, 0, 0, .04);
+
+  /* тема FullCalendar */
+  --fc-button-bg-color: var(--accent);
+  --fc-button-border-color: var(--accent);
+  --fc-button-hover-bg-color: #4338ca;
+  --fc-button-hover-border-color: #4338ca;
+  --fc-button-active-bg-color: #4338ca;
+  --fc-event-bg-color: var(--accent);
+  --fc-event-border-color: var(--accent);
+  --fc-today-bg-color: rgba(79, 70, 229, .06);
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  font: 15px/1.5 -apple-system, "Segoe UI", Roboto, sans-serif;
+  color: var(--ink);
+  background: var(--bg);
+}
+
+/* topbar */
+.topbar {
+  display: flex; align-items: center; justify-content: space-between; gap: 12px;
+  padding: 16px 24px; background: var(--card); border-bottom: 1px solid var(--line);
+}
+.topbar h1 { font-size: 18px; margin: 0; }
+.topbar h1 .tz { font-size: 13px; font-weight: 500; color: var(--muted); }
+
+/* calendar */
+main { padding: 24px; max-width: 1100px; margin: 0 auto; }
+#calendar { background: var(--card); border: 1px solid var(--line); border-radius: 12px; padding: 16px; box-shadow: var(--shadow); }
+.fc .fc-toolbar-title { font-size: 18px; text-transform: capitalize; }
+.fc .fc-event { cursor: pointer; padding: 1px 3px; }
+/* жёстко обрезаем контент по границе события, чтобы короткие карточки не вылезали на соседние */
+.fc-timegrid-event, .fc-timegrid-event .fc-event-main { overflow: hidden; }
+.fc .fc-event .ev { height: 100%; overflow: hidden; line-height: 1.25; }
+.fc .fc-event .ev-time { font-size: 11px; opacity: .85; }
+.fc .fc-event .ev-title { font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.fc .fc-event .ev-count { font-weight: 500; opacity: .85; }
+.fc .fc-event .ev-people { font-size: 11px; opacity: .9; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+
+/* читаемые метки времени слева: 07:00, моно-выравнивание */
+.fc .fc-timegrid-axis, .fc .fc-timegrid-slot-label { width: 60px; }
+.fc .fc-timegrid-slot-label-cushion {
+  font-size: 12px; font-weight: 600; color: var(--muted);
+  font-variant-numeric: tabular-nums;
+}
+.fc .fc-timegrid-slot { height: 56px; } /* часовая строка ~ как в корпоративных календарях */
+.fc .fc-col-header-cell-cushion { padding: 8px 4px; font-weight: 600; text-transform: capitalize; }
+/* индикатор «сейчас»: чистая тонкая линия во всю ширину, без кривого треугольника */
+.fc .fc-timegrid-now-indicator-arrow { display: none; }
+.fc .fc-timegrid-now-indicator-line { border-color: var(--danger); border-width: 2px 0 0; }
+
+/* buttons */
+.primary { background: var(--accent); color: var(--accent-ink); border: 0; padding: 8px 16px; border-radius: 8px; cursor: pointer; font-weight: 600; }
+.primary:hover { filter: brightness(1.08); }
+.ghost { background: transparent; border: 1px solid var(--line); padding: 8px 16px; border-radius: 8px; cursor: pointer; }
+
+/* modal */
+.modal { position: fixed; inset: 0; background: rgba(17, 24, 39, .5); display: flex; align-items: center; justify-content: center; padding: 16px; z-index: 50; }
+.modal.hidden { display: none; }
+.modal-card { background: var(--card); border-radius: 16px; padding: 24px; width: 100%; max-width: 440px; box-shadow: var(--shadow); }
+.modal-card h2 { margin: 0 0 16px; font-size: 18px; }
+#meeting-form { display: grid; gap: 14px; }
+#meeting-form label { display: grid; gap: 4px; font-size: 13px; color: var(--muted); }
+#meeting-form input[name="title"], #meeting-form input[type="date"], #meeting-form input[type="time"] {
+  padding: 9px 10px; border: 1px solid var(--line); border-radius: 8px; font-size: 15px; color: var(--ink); background: var(--card);
+}
+fieldset { border: 1px solid var(--line); border-radius: 10px; padding: 12px; margin: 0; }
+legend { font-size: 13px; color: var(--muted); padding: 0 6px; }
+.participants { display: flex; flex-wrap: wrap; gap: 8px; }
+.chk { display: inline-flex; align-items: center; gap: 6px; padding: 6px 10px; border: 1px solid var(--line); border-radius: 999px; cursor: pointer; font-size: 14px; color: var(--ink); }
+.chk input { accent-color: var(--accent); }
+.row { display: grid; grid-template-columns: 1.4fr 1fr 1fr; gap: 10px; }
+.actions { display: flex; justify-content: flex-end; gap: 10px; margin-top: 4px; }
+.error { color: var(--danger); font-size: 14px; margin: 0; }
+.link { background: none; border: 0; padding: 4px 0 0; margin: 0; color: var(--accent); font: inherit; font-size: 13px; font-weight: 600; cursor: pointer; text-align: left; }
+.link:hover { text-decoration: underline; }
+.hidden { display: none; }
+
+@media (max-width: 520px) {
+  .topbar { padding: 12px 16px; }
+  main { padding: 16px; }
+}

@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Календарь встреч компании</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header class="topbar">
+    <h1>Календарь встреч <span class="tz">· время МСК</span></h1>
+    <button id="add-btn" class="primary">+ Встреча</button>
+  </header>
+
+  <main>
+    <div id="calendar"></div>
+  </main>
+
+  <!-- Модалка создания -->
+  <div id="modal" class="modal hidden" role="dialog" aria-modal="true">
+    <div class="modal-card">
+      <h2>Новая встреча</h2>
+      <form id="meeting-form">
+        <label>Название
+          <input name="title" required placeholder="Sprint Planning" />
+        </label>
+
+        <fieldset>
+          <legend>Участники</legend>
+          <div id="participants" class="participants"></div>
+        </fieldset>
+
+        <div class="row">
+          <label>Дата
+            <input name="date" type="date" required />
+          </label>
+          <label>С
+            <input name="start" type="time" required />
+          </label>
+          <label>До
+            <input name="end" type="time" required />
+          </label>
+        </div>
+
+        <p id="form-error" class="error hidden"></p>
+
+        <div class="actions">
+          <button type="button" id="cancel" class="ghost">Отмена</button>
+          <button type="submit" class="primary">Создать</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="https://cdn.jsdelivr.net/npm/fullcalendar@6/index.global.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/fullcalendar@6/locales/ru.global.min.js"></script>
+  <script src="config.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
